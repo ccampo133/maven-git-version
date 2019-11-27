@@ -1,7 +1,12 @@
 # maven-git-version 
 
-An API and Maven plugin for performing automatic version inference in your POM. Various version inference strategies are
-provided for the Maven plugin, including one to infer the version based on the Git repository metadata.
+[![Download](https://api.bintray.com/packages/ccampo133/public/maven-git-version/images/download.svg)](https://bintray.com/ccampo133/public/maven-git-version/_latestVersion)
+[![](https://github.com/ccampo133/maven-git-version/workflows/Build%20master/badge.svg)](https://github.com/{owner}/{repo}/actions) 
+
+# Description
+`maven-git-version` is an API and Maven plugin for performing automatic version inference in your POM. 
+
+Various version inference strategies are provided for the Maven plugin, including one to infer the version based on the Git repository metadata.
 
 The main use-case of the extension plugin is to allow the POM versions to be updated during a build and NOT require
 the pom.xml file to be modified (causing potential merge conflicts down the road, or untracked changes).

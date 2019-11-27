@@ -1,0 +1,25 @@
+name: Release master
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+        with:
+          ref: ${{ github.ref }}
+      - name: Set up JDK 1.8
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+      - name: Deploy to Bintray JCenter
+        env:
+          JCENTER_API_KEY: ${{ secrets.JCENTER_API_KEY }}
+        run: |
+          mkdir ~/.m2
+          echo "<settings><servers><server><id>bintray-ccampo133-public</id><username>ccampo133</username><password>${JCENTER_API_KEY}</password></server></servers></settings>" > ~/.m2/settings.xml
+          mvn -B deploy --file pom.xml
+

@@ -23,7 +23,7 @@ under the License.
     <parent>
         <groupId>me.ccampo</groupId>
         <artifactId>maven-git-version</artifactId>
-        <version>0.1.0-SNAPSHOT</version>
+        <version>0.1.0</version>
     </parent>
 
     <artifactId>maven-git-version-strategies</artifactId>

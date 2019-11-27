@@ -22,7 +22,7 @@ under the License.
 
     <groupId>me.ccampo</groupId>
     <artifactId>maven-git-version</artifactId>
-    <version>0.1.0-SNAPSHOT</version>
+    <version>0.1.0</version>
     <packaging>pom</packaging>
 
     <properties>
@@ -75,5 +75,13 @@ under the License.
         <plugins>
         </plugins>
     </build>
+
+    <distributionManagement>
+        <repository>
+            <id>bintray-ccampo133-public</id>
+            <name>ccampo133-public</name>
+            <url>https://api.bintray.com/maven/ccampo133/public/maven-git-version/;publish=1</url>
+        </repository>
+    </distributionManagement>
 
 </project>
