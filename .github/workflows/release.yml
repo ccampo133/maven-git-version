@@ -17,9 +17,10 @@ jobs:
           java-version: 1.8
       - name: Deploy to Bintray JCenter
         env:
-          JCENTER_API_KEY: ${{ secrets.JCENTER_API_KEY }}
+          BINTRAY_USER: ${{ secrets.BINTRAY_USER }}
+          BINTRAY_API_KEY: ${{ secrets.BINTRAY_API_KEY }}
         run: |
           mkdir ~/.m2
-          echo "<settings><servers><server><id>bintray-ccampo133-public</id><username>ccampo133</username><password>${JCENTER_API_KEY}</password></server></servers></settings>" > ~/.m2/settings.xml
+          echo "<settings><servers><server><id>bintray-ccampo133-public</id><username>${BINTRAY_USER}</username><password>${BINTRAY_API_KEY}</password></server></servers></settings>" > ~/.m2/settings.xml
           mvn -B deploy --file pom.xml
 
