@@ -23,4 +23,15 @@ jobs:
           mkdir ~/.m2
           echo "<settings><servers><server><id>bintray-ccampo133-public</id><username>${BINTRAY_USER}</username><password>${BINTRAY_API_KEY}</password></server></servers></settings>" > ~/.m2/settings.xml
           mvn -B deploy --file pom.xml
+      - name: Sync to Maven Central
+        env:
+          BINTRAY_USER: ${{ secrets.BINTRAY_USER }}
+          BINTRAY_API_KEY: ${{ secrets.BINTRAY_API_KEY }}
+          SONATYPE_USER: ${{ secrets.SONATYPE_USER }}
+          SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
+        run: |
+          # Get latest version
+          RELEASE_VERSION=$(curl -X POST https://api.bintray.com/packages/"${BINTRAY_USER}"/public/maven-git-version/versions/_latest -u "${BINTRAY_USER}":"${BINTRAY_API_KEY}" --silent --show-error --fail | jq -r .name)
 
+          # Perform the actual sync
+          curl -X POST https://api.bintray.com/maven_central_sync/"${BINTRAY_USER}"/public/maven-git-version/versions/"${RELEASE_VERSION}" -u "${BINTRAY_USER}":"${BINTRAY_API_KEY}" --silent --show-error --fail
