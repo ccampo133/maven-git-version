@@ -24,12 +24,45 @@ under the License.
     <artifactId>maven-git-version</artifactId>
     <version>0.1.0</version>
     <packaging>pom</packaging>
+    <name>maven-git-version</name>
+    <description>Java interface to OpenCV and more</description>
+    <url>http://bytedeco.org/javacv/</url>
+
+    <scm>
+        <url>https://github.com/ccampo133/maven-git-version</url>
+        <connection>scm:git:git://github.com/ccampo133/maven-git-version.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com/ccampo133/maven-git-version.git</developerConnection>
+    </scm>
+
+    <developers>
+        <developer>
+            <name>Chris Campo</name>
+            <email>ccampo.progs@gmail.com</email>
+            <url>https://www.ccampo.me</url>
+        </developer>
+    </developers>
+
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
+    <distributionManagement>
+        <repository>
+            <id>bintray-ccampo133-public</id>
+            <name>ccampo133-public</name>
+            <url>https://api.bintray.com/maven/ccampo133/public/maven-git-version/;publish=1</url>
+        </repository>
+    </distributionManagement>
 
     <modules>
         <module>core</module>
@@ -84,16 +117,13 @@ under the License.
                     <artifactId>maven-source-plugin</artifactId>
                     <version>2.1.2</version>
                 </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>3.1.1</version>
+                </plugin>
             </plugins>
         </pluginManagement>
     </build>
-
-    <distributionManagement>
-        <repository>
-            <id>bintray-ccampo133-public</id>
-            <name>ccampo133-public</name>
-            <url>https://api.bintray.com/maven/ccampo133/public/maven-git-version/;publish=1</url>
-        </repository>
-    </distributionManagement>
 
 </project>

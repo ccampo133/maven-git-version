@@ -46,9 +46,9 @@ import java.util.regex.Pattern;
 
 /**
  * Maven Extension that will update all the projects in the reactor with an externally managed version.
- * <p/>
+ * <p>
  * This extension MUST be configured as a plugin in order to be configured.
- * <p/>
+ * <p>
  * 'strategy' - The configuration for an ExternalVersionStrategy.
  * 'hint' -  A component hint to load the ExternalVersionStrategy.
  *
