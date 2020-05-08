@@ -4,7 +4,26 @@
 [![](https://github.com/ccampo133/maven-git-version/workflows/Build%20master/badge.svg)](https://github.com/{owner}/{repo}/actions) 
 
 # Description
-`maven-git-version` is an API and Maven plugin for performing automatic version inference in your POM. 
+
+Set your Maven project verion at build time, or automatically generate it from your Git tags!
+
+Once you've enabled the Maven plugin, using it is dead simple. Just execute your build as normal, for example:
+
+```
+# Our repo is one commit ahead of tag 0.1.0
+$ mvn clean package
+[INFO] Scanning for projects...
+[INFO] Inferred project version: 0.1.0-dev.1+9bb4708f
+[INFO] Inferred project.build.finalName: simple-module-0.1.0-dev.1+9bb4708f
+[INFO]
+[INFO] ---------------------< com.example:simple-module >----------------------
+[INFO] Building simple-module 0.1.0-dev.1+9bb4708f
+[INFO] --------------------------------[ jar ]---------------------------------
+...
+[INFO] BUILD SUCCESS
+```
+
+In general, `maven-git-version` is an API and Maven plugin for performing automatic version inference in your POM. 
 
 Various version inference strategies are provided for the Maven plugin, including one to infer the version based on the Git repository metadata.
 
@@ -12,6 +31,8 @@ The main use-case of the extension plugin is to allow the POM versions to be upd
 the pom.xml file to be modified (causing potential merge conflicts down the road, or untracked changes).
 
 The main functionality of this repository has been forked and adapted from [maven-external-version](https://github.com/bdemers/maven-external-version).
+
+Continue reading below for more detailed usage scenarios, or dive straight into the [examples](https://github.com/ccampo133/maven-git-version/tree/master/example)!
 
 # Usage
 
