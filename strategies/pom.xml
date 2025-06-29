@@ -23,7 +23,7 @@ under the License.
     <parent>
         <groupId>me.ccampo</groupId>
         <artifactId>maven-git-version</artifactId>
-        <version>0.1.0</version>
+        <version>0.1.1</version>
     </parent>
 
     <artifactId>maven-git-version-strategies</artifactId>
@@ -65,7 +65,7 @@ under the License.
             <plugin>
                 <groupId>org.codehaus.plexus</groupId>
                 <artifactId>plexus-component-metadata</artifactId>
-                <version>1.6</version>
+                <version>2.2.0</version>
                 <executions>
                     <execution>
                         <goals>
