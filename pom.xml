@@ -22,7 +22,7 @@ under the License.
 
     <groupId>me.ccampo</groupId>
     <artifactId>maven-git-version</artifactId>
-    <version>0.1.0</version>
+    <version>0.1.1</version>
     <packaging>pom</packaging>
     <name>maven-git-version</name>
     <description>Java interface to OpenCV and more</description>
@@ -75,30 +75,30 @@ under the License.
             <dependency>
                 <groupId>org.apache.maven</groupId>
                 <artifactId>maven-core</artifactId>
-                <version>3.2.5</version>
+                <version>3.9.10</version>
             </dependency>
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
-                <version>4.13.1</version>
+                <version>4.13.2</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>org.assertj</groupId>
                 <artifactId>assertj-core</artifactId>
-                <version>3.11.1</version>
+                <version>3.27.3</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-core</artifactId>
-                <version>2.23.4</version>
+                <version>5.18.0</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>nl.jqno.equalsverifier</groupId>
                 <artifactId>equalsverifier</artifactId>
-                <version>3.1.4</version>
+                <version>4.0.3</version>
                 <scope>test</scope>
             </dependency>
         </dependencies>
@@ -110,17 +110,17 @@ under the License.
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-jar-plugin</artifactId>
-                    <version>2.3.2</version>
+                    <version>3.4.2</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-source-plugin</artifactId>
-                    <version>2.1.2</version>
+                    <version>3.3.1</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-javadoc-plugin</artifactId>
-                    <version>3.1.1</version>
+                    <version>3.11.2</version>
                 </plugin>
             </plugins>
         </pluginManagement>

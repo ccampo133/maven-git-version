@@ -42,7 +42,10 @@ public class GroupArtifactVersion {
 
     @Override
     public int hashCode() {
-        return Objects.hash(groupId, artifactId, version);
+        return Objects.hash(
+                groupId == null ? null : groupId.toLowerCase(),
+                artifactId == null ? null : artifactId.toLowerCase(),
+                version == null ? null : version.toLowerCase());
     }
 
     @Override
