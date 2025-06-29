@@ -74,8 +74,14 @@ public class VersionInferenceExtension extends AbstractMavenLifecycleParticipant
     public void afterProjectsRead(final MavenSession session) throws MavenExecutionException {
         init();
 
+        final PluginConfig currentPluginConfig = pluginConfigProvider.getForProject(session.getCurrentProject());
+        final String currentNewVersion = getNewVersion(currentPluginConfig.versionStrategy, session.getCurrentProject());
+
         for (final MavenProject mavenProject : session.getAllProjects()) {
-            setProjectVersion(mavenProject);
+            final PluginConfig pluginConfig = pluginConfigProvider.getForProject(mavenProject);
+            final String newVersion =
+                    pluginConfig.equals(currentPluginConfig) ? currentNewVersion : getNewVersion(pluginConfig.versionStrategy, mavenProject);
+            setProjectVersion(mavenProject, newVersion);
         }
 
         // Need to do a second pass here since our projectGavs map is populated now
@@ -109,34 +115,25 @@ public class VersionInferenceExtension extends AbstractMavenLifecycleParticipant
         }
     }
 
-    private void setProjectVersion(final MavenProject mavenProject) throws MavenExecutionException {
-        // Get the plugin config
-        final PluginConfig pluginConfig = pluginConfigProvider.getForProject(mavenProject);
+    private void setProjectVersion(final MavenProject mavenProject, String newVersion) throws MavenExecutionException {
+        logger.info("Inferred project version: " + newVersion);
 
-        if (pluginConfig != null) {
-            // Store the old version before changing it
-            final String oldVersion = mavenProject.getVersion();
+        // Store the old version before changing it
+        final String oldVersion = mavenProject.getVersion();
+        final String oldFinalName = mavenProject.getBuild().getFinalName();
+        final String newFinalName = oldFinalName.replaceFirst(Pattern.quote(oldVersion), newVersion);
+        logger.info("Inferred project.build.finalName: " + newFinalName);
 
-            // Now use the strategy to figure out the new version
-            final String newVersion = getNewVersion(pluginConfig.versionStrategy, mavenProject);
+        // Now that we have the new version, we update the project versions.
+        mavenProject.setVersion(newVersion);
+        mavenProject.getArtifact().setVersion(newVersion);
+        VersionRange versionRange = VersionRange.createFromVersion(newVersion);
+        mavenProject.getArtifact().setVersionRange(versionRange);
+        mavenProject.getBuild().setFinalName(newFinalName);
 
-            logger.info("Inferred project version: " + newVersion);
-
-            final String oldFinalName = mavenProject.getBuild().getFinalName();
-            final String newFinalName = oldFinalName.replaceFirst(Pattern.quote(oldVersion), newVersion);
-            logger.info("Inferred project.build.finalName: " + newFinalName);
-
-            // Now that we have the new version, we update the project versions.
-            mavenProject.setVersion(newVersion);
-            mavenProject.getArtifact().setVersion(newVersion);
-            VersionRange versionRange = VersionRange.createFromVersion(newVersion);
-            mavenProject.getArtifact().setVersionRange(versionRange);
-            mavenProject.getBuild().setFinalName(newFinalName);
-
-            final GroupArtifactVersion oldProjectVersion =
-                    GroupArtifactVersion.of(mavenProject.getGroupId(), mavenProject.getArtifactId(), oldVersion);
-            projectGavs.put(oldProjectVersion, newVersion);
-        }
+        final GroupArtifactVersion oldProjectVersion =
+                GroupArtifactVersion.of(mavenProject.getGroupId(), mavenProject.getArtifactId(), oldVersion);
+        projectGavs.put(oldProjectVersion, newVersion);
     }
 
     /**
