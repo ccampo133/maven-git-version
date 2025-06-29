@@ -13,6 +13,7 @@ import org.codehaus.plexus.configuration.xml.XmlPlexusConfiguration;
 import org.codehaus.plexus.util.xml.Xpp3Dom;
 
 import java.io.File;
+import java.util.Objects;
 import java.util.Optional;
 
 public class PluginConfig {
@@ -96,5 +97,17 @@ public class PluginConfig {
         } catch (final ComponentLookupException | ComponentConfigurationException e) {
             throw new MavenExecutionException(e.getMessage(), e);
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof PluginConfig)) return false;
+        PluginConfig that = (PluginConfig) o;
+        return shouldGenerateTemporaryFile == that.shouldGenerateTemporaryFile && shouldDeleteTemporaryFile == that.shouldDeleteTemporaryFile && shouldUpdateDependencies == that.shouldUpdateDependencies && Objects.equals(versionStrategy, that.versionStrategy);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(shouldGenerateTemporaryFile, shouldDeleteTemporaryFile, shouldUpdateDependencies, versionStrategy);
     }
 }
